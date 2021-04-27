@@ -29,7 +29,7 @@ Run the main file:
 ```sh
 $ python main.py
 ```
-</br></br>
+</br>
 
 # Minimum Excel Setup
 
@@ -48,7 +48,7 @@ $ python main.py
 > **column headers must be exact and are case sensitive*  
 > **Tab names will be pulled and used to designate functional area, name them accordingly.*
 
-</br></br>
+</br>
 
 # Example Output
 

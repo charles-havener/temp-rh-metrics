@@ -1,0 +1,6 @@
+# ignore certain folders
+__pycache__/
+data/
+images/
+venv/
+

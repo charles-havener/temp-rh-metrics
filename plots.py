@@ -44,8 +44,8 @@ def CreateBoxChart(df, output_name, data_name, category, days=0):
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
     title_cat = {'Day': 'weekday', 'Hour': 'hour', 'Window': 'time window'}
     title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("\\")
-    title = "Distribution of " + title_data[data_name] + " by " + title_cat[category] + " (" + title_days + ") -- " + title_group[0]
+    title_group = output_name.split("/")
+    title = "Distribution of " + title_data[data_name] + " by " + title_cat[category] + " (" + title_days + ") -- " + title_group[1]
 
     # Create Chart
     fig = go.Figure()
@@ -140,8 +140,8 @@ def createControlChart(df, output_name, data_name, categories, days):
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
     title_cat = {'Day': 'weekday', 'DATE': 'date', 'Hour': 'hour', 'Window': 'time window'}
     title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("\\")
-    title = "Control Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[0]
+    title_group = output_name.split("/")
+    title = "Control Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[1]
 
     # Create Chart
     fig = go.Figure()
@@ -266,8 +266,8 @@ def createRangeChart(df, output_name, data_name, categories, days):
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
     title_cat = {'Day': 'weekday', 'DATE': 'date', 'Hour': 'hour', 'Window': 'time window'}
     title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("\\")
-    title = "Range Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[0]
+    title_group = output_name.split("/")
+    title = "Range Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[1]
 
     # Create Chart
     fig = go.Figure()

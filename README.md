@@ -8,7 +8,7 @@
 </br></br>
 
 # About the project
-TODO
+Create box, control, and range charts for temperature and relative humidity readings in various functional areas for a specified time range.
 </br>
 
 # Running the Script
@@ -27,9 +27,20 @@ $ pip install -r requirements.txt
 ```
 Run the main file:
 ```sh
-$ python main.py
+$ python main.py -a <area> -s <start_date> -e <end_date>
 ```
 </br>
+
+# Run Parameters
+
+* -h or --help
+    * print parameters list out to console.
+* -a or --area
+    * specify a functional area. Will list valid inputs if provided area is not.
+* -s or --start_date
+    * start date of date range to use (inclusive range).
+* -e or --end_date
+    * end date of date range to use (inclusive range).
 
 # Minimum Excel Setup
 

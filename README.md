@@ -64,9 +64,9 @@ $ python main.py -a <area> -s <start_date> -e <end_date>
 # Example Output
 
 ### Box Chart
-<img src="examples/Micro-E-RH-Day-All Data-BoxChart.png">
+<img src="examples/StockL_RH_Day_2022-01-01_2022-03-22-BoxChart.png">
 </br></br>
 
 ### Control Charts
-<img src="examples/Micro-E-RH-DATE, Window-20 Points-ControlChart.png">
-<img src="examples/Micro-E-RH-DATE, Window-20 Points-RangeChart.png">
+<img src="examples/StockL_RH_DATE_2022-01-01_2022-03-22-ControlChart.png">
+<img src="examples/StockL_RH_DATE_2022-01-01_2022-03-22-RangeChart.png">

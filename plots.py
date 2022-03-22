@@ -2,7 +2,6 @@ from datetime import timedelta
 import plotly.graph_objects as go
 import pandas as pd
 
-
 #colors
 blue_100_color = 'rgba(0,101,159,1)'
 blue_75_color = 'rgba(0,101,159,0.75)'
@@ -16,21 +15,15 @@ axis_grid_color = 'rgba(204,204,204,0.5)'
 text_color = 'rgba(119,119,119,1)'
 background_color = 'rgba(255,255,255,1)'
 
-def CreateBoxChart(df, output_name, data_name, category, days=0):
-    """Creates a categorized box chart with data filtered to use only the most recent n days.
+def CreateBoxChart(df, output_name, data_name, category, area, start_date, end_date):
+    """Creates a categorized box chart with data filtered to specifications.
 
     Args:
         df (dataframe): a pandas dataframe that contains the data to use
         output_name (str): the name of the file to be output along with it's path inside the images folder
         data_name (str): the header for the dataframe column to pull data points from
         category (str): the header for the dataframe column to categorize data points on
-        days (int, optional): the number of recent days to pull data from. A value of 0 will pull from all available. Defaults to 0.
     """
-
-    # Filter df to include only most recent 'days' days
-    if days > 0:
-        in_days = df['DATE'] >= df['DATE'].max()-timedelta(days)
-        df = df[in_days]
 
     # Sets the order of the x axis
     if category == "Day":
@@ -42,10 +35,8 @@ def CreateBoxChart(df, output_name, data_name, category, days=0):
 
     # Generate Title
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
-    title_cat = {'Day': 'weekday', 'Hour': 'hour', 'Window': 'time window'}
-    title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("/")
-    title = "Distribution of " + title_data[data_name] + " by " + title_cat[category] + " (" + title_days + ") -- " + title_group[1]
+    title_cat = {'Day': 'Weekday', 'Hour': 'Hour', 'Window': 'Time Window'}
+    title = f"Distribution of {title_data[data_name]} by {title_cat[category]} ({start_date} - {end_date}) -- {area}"
 
     # Create Chart
     fig = go.Figure()
@@ -125,7 +116,7 @@ def CreateBoxChart(df, output_name, data_name, category, days=0):
     fig.write_image(output_name + ".png")
 
 
-def createControlChart(df, output_name, data_name, categories, days):
+def createControlChart(df, output_name, data_name, categories, area, start_date, end_date):
     """Creates a chart showing the change in measured data overtime as well as the control limits for the data set.
 
     Args:
@@ -133,15 +124,12 @@ def createControlChart(df, output_name, data_name, categories, days):
         output_name (string): the name of the file to be output
         data_name (string): the category of data to be charted
         categories (list): the categories by which the dataframe is filtered
-        days (int): Number of recent days worth of data used to generate the charts.
     """
 
     # Generate Title
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
     title_cat = {'Day': 'weekday', 'DATE': 'date', 'Hour': 'hour', 'Window': 'time window'}
-    title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("/")
-    title = "Control Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[1]
+    title = f"Control Chart of {title_data[data_name]} by {', '.join([title_cat[cat] for cat in categories])} ({start_date} - {end_date}) -- {area}"
 
     # Create Chart
     fig = go.Figure()
@@ -251,7 +239,7 @@ def createControlChart(df, output_name, data_name, categories, days):
     fig.write_image(output_name + "-ControlChart.png")
 
 
-def createRangeChart(df, output_name, data_name, categories, days):
+def createRangeChart(df, output_name, data_name, categories, area, start_date, end_date):
     """Creates a chart showing the magnitude of the changes in measured data for consecutive points over time.
 
     Args:
@@ -259,15 +247,12 @@ def createRangeChart(df, output_name, data_name, categories, days):
         output_name (string): the name of the file to be output
         data_name (string): the category of data to be charted
         categories (list): the categories by which the dataframe is filtered
-        days (int): Number of recent days worth of data used to generate the charts.
     """
 
     # Generate Title
     title_data = {'TEMP F': 'Temperature (F)', 'RH %': 'Relative Humidity (%)'}
     title_cat = {'Day': 'weekday', 'DATE': 'date', 'Hour': 'hour', 'Window': 'time window'}
-    title_days = 'all data' if days <= 0 else 'recent ' + str(days) + ' days'
-    title_group = output_name.split("/")
-    title = "Range Chart of " + title_data[data_name] + " by " + ", ".join([title_cat[cat] for cat in categories]) + " (" + title_days + ") -- " + title_group[1]
+    title = f"Range Chart of {title_data[data_name]} by {', '.join([title_cat[cat] for cat in categories])} ({start_date} - {end_date}) -- {area}"
 
     # Create Chart
     fig = go.Figure()
@@ -364,7 +349,7 @@ def createRangeChart(df, output_name, data_name, categories, days):
     fig.write_image(output_name + "-RangeChart.png")
 
 
-def CreateControlRangeCharts(df, output_name, data_name, categories, days=0):
+def CreateControlRangeCharts(df, output_name, data_name, categories, area, start_date, end_date):#, days=0):
     """Modifies the data frame in order to create control and range charts for given data
 
     Args:
@@ -372,13 +357,12 @@ def CreateControlRangeCharts(df, output_name, data_name, categories, days=0):
         output_name (string): the name of the file to be output
         data_name (string): the category of data to be charted
         categories (list): the categories by which the dataframe is filtered
-        days (int, optional): Number of recent days worth of data used to generate the charts. Defaults to 0.
     """
 
     # Filter df to include only most recent 'days' days
-    if days > 0:
-        in_days = df['DATE'] >= df['DATE'].max()-timedelta(days)
-        df = df[in_days]
+    #if days > 0:
+        #in_days = df['DATE'] >= df['DATE'].max()-timedelta(days)
+        #df = df[in_days]
 
     df = pd.DataFrame({'avg' : df.groupby(categories)[data_name].mean()}).reset_index()
     df['diff'] = abs(df['avg'].diff(1))
@@ -399,8 +383,8 @@ def CreateControlRangeCharts(df, output_name, data_name, categories, days=0):
     df['R UCL'] = pd.Series([r_ucl for _ in range(len(df.index))])
 
     # Create Control and Range Chart with modified data frame
-    createControlChart(df, output_name, data_name, categories, days)
-    createRangeChart(df, output_name, data_name, categories, days)
+    createControlChart(df, output_name, data_name, categories, area, start_date, end_date)#, days)
+    createRangeChart(df, output_name, data_name, categories, area, start_date, end_date)#, days)
 
 if __name__ == "__main__":
     pass

@@ -37,10 +37,15 @@ $ python main.py -a <area> -s <start_date> -e <end_date>
     * print parameters list out to console.
 * -a or --area
     * specify a functional area. Will list valid inputs if provided area is not.
+    * required
 * -s or --start_date
     * start date of date range to use (inclusive range).
+    * formatted YYYY-MM-DD
+    * optional; deafaults to 1900-01-01
 * -e or --end_date
     * end date of date range to use (inclusive range).
+    * formatted YYYY-MM-DD
+    * optional; defaults to 3000-01-01
 
 # Minimum Excel Setup
 

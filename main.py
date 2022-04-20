@@ -49,6 +49,7 @@ def main(argv):
     if area not in sheets:
         print(f"invalid {area} input, must be a member of:\n" +
         f"{sheets}")
+        sys.exit()
 
     # Dictionaries to map parameters to strings for file naming
     data_dict = {"TEMP F": "Temp", "RH %": "RH"}
